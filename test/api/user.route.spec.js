@@ -6,32 +6,70 @@ const User = require('../../models/user.model');
 
 describe('Pruebas sobre API de user', () => {
 
-    
+
     beforeAll(async () => {
         await mongoose.connect('mongodb://localhost:27017/users')
     });
-
     afterAll(async () => {
         await mongoose.disconnect();
-    })
+    });
 
     describe('GET /api/users', () => {    
 
-        let response;
+        let user;
         beforeEach(async () => {
-            response = await request(app).get('/api/users').send();
-        })
+            user = await User.create({ name: 'Johnny', email: 'johnny@email.com', password: '1234567' });
+        });
+
+        afterEach(async () => {
+            await User.findByIdAndDelete(user._id);
+        });
 
         it('la ruta funciona', async () => {
-            
+            const response = await request(app).get('/api/users').send();
+
             expect(response.status).toBe(200);
             expect(response.headers['content-type']).toContain('json');
         });
 
         it('la ruta nos devuelve array de usuarios', async () => {
+            const response = await request(app).get('/api/users').send();
 
             expect(response.body).toBeInstanceOf(Array);
         });
+    });
+
+    describe('GET /api/users/by', () => {    
+
+        let user;
+        beforeEach(async () => {
+            user = await User.create({ name: 'Johnny', email: 'johnny@email.com', password: '1234567' });
+        });
+
+        afterEach(async () => {
+            await User.findByIdAndDelete(user._id);
+        });
+
+        it('la ruta funciona', async () => {
+            const response = await request(app).get(`/api/users/by/${user._id}`).send();
+        
+            expect(response.status).toBe(200);
+            expect(response.headers['content-type']).toContain('json');
+        });
+
+        it('la ruta nos devuelve un usuario', async () => {
+            response = await request(app).get(`/api/users/by/${user._id}`).send();
+
+            expect(response.body.name).toBe(user.name);
+        });
+
+        const wrongId = '1234';
+        it('Error en la búsqueda por id', async () => {
+            response = await request(app).get(`/api/users/by/${wrongId}`).send();
+
+            expect(response.status).toBe(500);
+            expect(response.body.error).toBeDefined();
+        })
     });
 
     describe('POST /api/users', () => {
@@ -99,13 +137,13 @@ describe('Pruebas sobre API de user', () => {
     describe('DELETE /api/users', () =>{
 
         let user;
-        let response;
+       // let response;
         beforeEach(async () => {
             user = await User.create({ name: 'Johnny', email: 'johnny@email.com', password: '1234567' });
             response = await request(app).delete(`/api/users/${user._id}`).send();
         });
 
-        it('la ruta funciona', () => {
+        it('la ruta funciona', async () => {
 
             expect(response.status).toBe(200);
             expect(response.headers['content-type']).toContain('json');
@@ -113,7 +151,6 @@ describe('Pruebas sobre API de user', () => {
         });
 
         it('se borra correctamente', async () => {
-
             expect(response.body._id).toBeDefined();
             
             const foundUser = await User.findById(user._id);
@@ -123,6 +160,5 @@ describe('Pruebas sobre API de user', () => {
 
 
     })
-
 
 })
