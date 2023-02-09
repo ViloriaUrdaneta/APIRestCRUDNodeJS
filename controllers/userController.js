@@ -1,9 +1,7 @@
 const User = require('../models/user.model');
-//const connection = require('../database/connection')
 
 const getUser = async (req, res, next) => {
     try {
-        //await connection();
         const users = await User.find();
         res.json(users);
     }catch (error) {
@@ -13,7 +11,6 @@ const getUser = async (req, res, next) => {
 
 const getUserById = async (req, res, next) => {
     try {
-        //await connection();
         const users = await User.findById(
             req.params.userId,
         );
@@ -25,7 +22,6 @@ const getUserById = async (req, res, next) => {
 
 const postUser = async (req, res, next) => {
     try {
-        //await connection();
         const newUser = await User.create(req.body);
         res.json(newUser);
     } catch (error) {
@@ -35,7 +31,6 @@ const postUser = async (req, res, next) => {
 
 const putUser = async (req, res, next) => {
     try {
-        //await connection();
         const userEdit = await User.findByIdAndUpdate(
             req.params.userId,
             req.body,
@@ -49,7 +44,6 @@ const putUser = async (req, res, next) => {
 
 const deleteUser = async (req, res, next) => {
     try {
-        //await connection();
         const user = await User.findByIdAndDelete(
             req.params.userId,
         );
