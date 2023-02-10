@@ -10,7 +10,7 @@ router.post('/', bookController.postBook);
 
 //router.put('/:userId', userController.putUser);
 
-//router.delete('/:userId', userController.deleteUser);
+router.delete('/:bookId', bookController.deleteBook);
 
 
 
