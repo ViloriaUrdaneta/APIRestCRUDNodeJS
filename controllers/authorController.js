@@ -1,4 +1,3 @@
-//const Book = require('../models/book.model');
 const Author = require('../models/author.model')
 
 const getAuthor = async (req, res, next) => {
