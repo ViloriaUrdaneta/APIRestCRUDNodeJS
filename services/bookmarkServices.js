@@ -26,15 +26,11 @@ async function createBookmark(newBookmarkData) {
 async function findBookmarksByBook(bookId) {
     try {
 
-        console.log(bookId)
         const book = await Book.findById(bookId);
         const bookmarksIdByBookList = [ ...book.bookmarks ];
         const bookmarksByBookList = await Bookmark.find({ '_id': { $in: bookmarksIdByBookList}});
         
-        console.log(bookmarksByBookList)
-
         return bookmarksByBookList;
-
     } catch (error) {
         console.log(error, 'error en findBookmarksByBook, bookmarkServices')
     }
