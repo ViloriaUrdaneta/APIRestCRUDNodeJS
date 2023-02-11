@@ -27,5 +27,14 @@ async function createBook(newBookData) {
 }
 
 
+async function addBookmarkToBook(bookId, bookmarkId) {
 
-module.exports = { createBook }
+    const book = await Book.findById(bookId);
+    book.bookmarks = book.bookmarks.concat(bookmarkId);
+    await book.save();
+
+}
+
+
+
+module.exports = { createBook, addBookmarkToBook }

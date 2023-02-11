@@ -7,7 +7,7 @@ const bookmarkSchema = new Schema({
     resume: { type: String, required: true },
     createdAt: { type: Date },
     book: { type: Schema.Types.ObjectId , ref: "Book", required: true },
-    user: { type: Schema.Types.ObjectId , ref: "User", required: true }
+    //user: { type: Schema.Types.ObjectId , ref: "User", required: true }
 });
 
 module.exports = mongoose.model('Bookmark', bookmarkSchema);

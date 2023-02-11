@@ -12,8 +12,8 @@ const getBook = async (req, res, next) => {
 
 const postBook = async (req, res, next) => {
     try {
-        const { title, author } = req.body
-        const newBook = await bookServices.createBook({title, author})
+        const { title, author } = req.body;
+        const newBook = await bookServices.createBook({title, author});
         res.json(newBook);
     } catch (error) {
         res.status(500).json({ error: 'error at postBook in bookController'});
@@ -23,7 +23,7 @@ const postBook = async (req, res, next) => {
 const deleteBook = async (req, res, next) => {
     try {
         const book = await Book.findByIdAndDelete(
-            req.params.bookId,
+            req.params.bookId
         );
         res.json(book);
     } catch (error) {
