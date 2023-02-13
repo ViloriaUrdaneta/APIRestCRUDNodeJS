@@ -5,6 +5,7 @@ router.use('/users', require('./user.route'));
 router.use('/books', require('./book.route'));
 router.use('/authors', require('./author.route'));
 router.use('/bookmarks', require('./bookmark.route'));
+router.use('/google', require('./google.route'));
 
 
 module.exports = router;
