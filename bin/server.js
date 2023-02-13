@@ -1,7 +1,8 @@
+require("dotenv").config();
 const http = require('http');
 const app = require('../app');
 const { swaggerDocs } = require('../swagger/swagger');
-const port = process.env.PORT || 3500;
+const port = process.env.PORT;
 const connection = require('../database/connection')
 
 
