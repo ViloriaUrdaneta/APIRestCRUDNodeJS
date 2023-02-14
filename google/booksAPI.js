@@ -1,8 +1,6 @@
 require("dotenv").config();
 const axios = require('axios');
-
 const key = process.env.GOOGLE_API_KEY;
-
 
 const search = async (q) => {
     try {

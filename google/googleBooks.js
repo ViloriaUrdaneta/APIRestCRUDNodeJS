@@ -1,18 +1,15 @@
 const GoogleBooks = require("google-books-search");
 
-
-
-
-var options = {
-    limit: 1,
-    type: "books",
-    order: "relevance",
-    lang: "es",
-    //key: API_KEY
+const searchBooks = (term, options) => {
+    return new Promise((resolve, reject) => {
+        GoogleBooks.search(term, options, (error, results) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(results);
+            }
+        });
+    });
 };
 
-
-module.exports = function(query, callback) {
-    options.q = query;
-    GoogleBooks.search(options, callback);
-};
+module.exports = searchBooks;
