@@ -1,15 +1,15 @@
-require("dotenv").config();
-const axios = require('axios');
-const key = process.env.GOOGLE_API_KEY;
+const GoogleBooks = require("google-books-search");
 
-const search = async (q) => {
-    try {
-        const response = await axios.get(`https://www.googleapis.com/books/v1/volumes?q=${q}&key=${key}`);
-        return response.data;
-    } catch (error) {
-        console.error(error);
-        return null;
-    }
+const searchBooks = (term, options) => {
+    return new Promise((resolve, reject) => {
+        GoogleBooks.search(term, options, (error, results) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(results);
+            }
+        });
+    });
 };
 
-module.exports = { search };
+module.exports = searchBooks;

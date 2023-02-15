@@ -1,19 +1,18 @@
-const googleBooks = require('../google/booksAPI');
-const googleBooksAPI = require('../google/googleBooks');
+const googleBooksAPI = require('../google/booksAPI');
 require("dotenv").config();
 
+const googleKey = process.env.GOOGLE_API_KEY;
 
 
 const getGoogleAPI = async (req, res, next) => {
     
-
     try {
-        const term = req.body.q;
+        const { term, entries } = req.body;
         const options = {
-            key: process.env.GOOGLE_API_KEY,
+            key: googleKey,
             field: "title",
             type: 'books',
-            limit: 1,
+            limit: entries,
             order: 'relevance',
             lang: "es"
         };
@@ -23,24 +22,36 @@ const getGoogleAPI = async (req, res, next) => {
             })
         .catch((error) => {
             console.error(error);
-            res.status(500).send("Error searching books");
+            res.status(500).send("error googleBooksAPI in googleController");
         });    
     } catch (error) {
-        res.status(500).send(error);
+        res.status(500).send(error, 'error at getGoogleApi in googleController');
     }
 
+}
 
-    /*
+const getGoogleAPIById = async (req, res, next) => {
+    
     try {
-        const q = req.body.q;
-        const books = await googleBooks.search(q);
-        res.send(books);
-    }catch (error) {
-        res.status(500).json({ error: 'error at getGoogleApi in googleController'});
+        const id = req.params.id;
+        const options = {
+            key: googleKey,
+            lang: "es"
+        };
+        googleBooksAPI(id, options)
+        .then((results) => {
+                res.json(results);
+            })
+        .catch((error) => {
+            console.error(error);
+            res.status(500).send("error googleBooksAPI in googleController");
+        });    
+    } catch (error) {
+        res.status(500).send(error, 'error at getGoogleApi in googleController');
     }
-    */
+
 }
 
 
-module.exports = { getGoogleAPI }
+module.exports = { getGoogleAPI, getGoogleAPIById }
 
