@@ -9,4 +9,11 @@ async function addBookToAuthor(authorId, bookId) {
 
 }
 
-module.exports = { addBookToAuthor }
+async function findAuthorByName(nameSearched) {
+
+    const authorSearched = await Author.findOne({name: nameSearched});
+    return authorSearched;
+
+}
+
+module.exports = { addBookToAuthor, findAuthorByName }
