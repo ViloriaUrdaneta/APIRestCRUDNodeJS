@@ -18,6 +18,7 @@ async function createBook(newBookData) {
             const idAuthor = newAuthor._id;
             newBook.title = newBookData.title;
             newBook.author = idAuthor;
+            newBook.googleId = newBookData.googleId;
             await newBook.save();
             const idBook = newBook._id
             authorServices.addBookToAuthor(idAuthor, idBook )
@@ -28,6 +29,7 @@ async function createBook(newBookData) {
             const idAuthor = await  authorServices.findAuthorByName(newBookData.author);
             newBook.title = newBookData.title;
             newBook.author = idAuthor;
+            newBook.googleId = newBookData.googleId;
             await newBook.save();
             const idBook = newBook._id
             authorServices.addBookToAuthor(idAuthor, idBook )
@@ -48,6 +50,13 @@ async function addBookmarkToBook(bookId, bookmarkId) {
 
 }
 
+async function findBookByGoogleId(googleIdSearched) {
+
+    const bookSearched = await Book.findOne({googleId : googleIdSearched});
+    return bookSearched;
+
+}
 
 
-module.exports = { createBook, addBookmarkToBook }
+
+module.exports = { createBook, addBookmarkToBook, findBookByGoogleId }
