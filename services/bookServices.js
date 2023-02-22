@@ -57,6 +57,29 @@ async function findBookByGoogleId(googleIdSearched) {
 
 }
 
+async function findBookVolumes() {
+
+    const bookVolumesList = []
+
+    try {
+        const books = await Book.find();
+        
+        for (const book of books) {
+            const bookVolume = {};
+            bookVolume.title = book.title;
+            bookVolume.id = book._id;
+            const authorName = await Author.findOne({_id: book.author});
+            bookVolume.author = authorName.name
+
+            bookVolumesList.push(bookVolume)
+        }
+    } catch (error) {
+        console.log(error, 'error en findBookVolumes en bookservices')
+    }
+    
+    return bookVolumesList
+}
 
 
-module.exports = { createBook, addBookmarkToBook, findBookByGoogleId }
+
+module.exports = { createBook, addBookmarkToBook, findBookByGoogleId, findBookVolumes }

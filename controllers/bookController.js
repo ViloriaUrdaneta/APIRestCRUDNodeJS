@@ -10,6 +10,16 @@ const getBook = async (req, res, next) => {
     }
 };
 
+const getBookVolumes = async (req, res, next) => {
+    try {
+        const bookVolumes = await bookServices.findBookVolumes();
+        res.json(bookVolumes);
+    }catch (error) {
+        res.status(500).json({ error: 'error at getBookVolumes in bookController'});
+        console.log(error)
+    }
+};
+
 const postBook = async (req, res, next) => {
     try {
         const { title, author } = req.body;
@@ -31,4 +41,4 @@ const deleteBook = async (req, res, next) => {
     }
 };
 
-module.exports = { getBook, postBook, deleteBook }
+module.exports = { getBook, postBook, deleteBook, getBookVolumes }
