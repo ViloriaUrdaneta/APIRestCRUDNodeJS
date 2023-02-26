@@ -5,15 +5,15 @@ require("dotenv").config();
 const googleKey = process.env.GOOGLE_API_KEY;
 
 
-const getGoogleAPI = async (req, res, next) => {
+const searchGoogleAPI = async (req, res, next) => {
     
     try {
-        const { term, entries } = req.body;
+        const { term } = req.body;
         const options = {
             key: googleKey,
             field: "title",
             type: 'books',
-            limit: entries,
+            limit: 7,
             order: 'relevance',
             lang: "es"
         };
@@ -58,7 +58,6 @@ const postGoogleAPI = async (req, res, next) => {
     if(await bookServices.findBookByGoogleId(req.params.id)){
         res.status(500).send("este libro ya existe en tu biblioteca")
     } else {
-    
         try {
             const id = req.params.id;
             const options = {
@@ -84,5 +83,5 @@ const postGoogleAPI = async (req, res, next) => {
 }
 
 
-module.exports = { getGoogleAPI, getGoogleAPIById, postGoogleAPI }
+module.exports = { searchGoogleAPI, getGoogleAPIById, postGoogleAPI }
 

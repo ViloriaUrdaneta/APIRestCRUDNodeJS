@@ -2,7 +2,7 @@ const router = require('express').Router();
 const googleController = require('../../controllers/googleController')
 
 
-router.get('/', googleController.getGoogleAPI);
+router.post('/', googleController.searchGoogleAPI);
 
 router.get('/by/:id', googleController.getGoogleAPIById);
 
