@@ -20,6 +20,15 @@ const getBookVolumes = async (req, res, next) => {
     }
 };
 
+const getBookById = async (req, res, next) => {
+    try {
+        const book = await Book.findById(req.params.bookId);
+        res.json(book);
+    }catch (error) {
+        res.status(500).json({ error: 'error at getBook in bookController'});
+    }
+};
+
 const postBook = async (req, res, next) => {
     try {
         const { title, author } = req.body;
@@ -41,4 +50,4 @@ const deleteBook = async (req, res, next) => {
     }
 };
 
-module.exports = { getBook, postBook, deleteBook, getBookVolumes }
+module.exports = { getBook, postBook, deleteBook, getBookVolumes, getBookById }

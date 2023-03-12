@@ -13,7 +13,7 @@ const searchGoogleAPI = async (req, res, next) => {
             key: googleKey,
             field: "title",
             type: 'books',
-            limit: 7,
+            limit: 5,
             order: 'relevance',
             lang: "es"
         };

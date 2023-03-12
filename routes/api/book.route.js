@@ -6,7 +6,7 @@ router.get('/', bookController.getBook);
 
 router.get('/volumes', bookController.getBookVolumes);
 
-//router.get('/by/:userId', userController.getUserById);
+router.get('/by/:bookId', bookController.getBookById);
 
 router.post('/', bookController.postBook);
 
