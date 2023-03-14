@@ -18,6 +18,7 @@ async function createBook(newBookData) {
             const idAuthor = newAuthor._id;
             newBook.title = newBookData.title;
             newBook.author = idAuthor;
+            newBook.authorName = newBookData.authorName;
             newBook.googleId = newBookData.googleId;
             newBook.description = newBookData.description;
             if(newBookData.thumbnail){
@@ -33,6 +34,7 @@ async function createBook(newBookData) {
             const idAuthor = await  authorServices.findAuthorByName(newBookData.author);
             newBook.title = newBookData.title;
             newBook.author = idAuthor;
+            newBook.authorName = newBookData.authorName;
             newBook.googleId = newBookData.googleId;
             newBook.description = newBookData.description;
             if(newBookData.thumbnail){

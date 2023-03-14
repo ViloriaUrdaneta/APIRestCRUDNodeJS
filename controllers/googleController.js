@@ -69,6 +69,7 @@ const postGoogleAPI = async (req, res, next) => {
                         console.log(results)
                         const title = results.map((result) => result.title)[0];
                         const author = results.map((result) => result.authors[0])[0];
+                        const authorName = results.map((result) => result.authors[0])[0];
                         let description;
                         if(results.map((result) => result.description)[0]){
                             description = results.map((result) => result.description)[0];
@@ -83,7 +84,7 @@ const postGoogleAPI = async (req, res, next) => {
                         }
                         console.log('pre')
                         const googleId = id;
-                        const newBook = await bookServices.createBook({title, author, description, googleId, thumbnail});
+                        const newBook = await bookServices.createBook({title, author, authorName, description, googleId, thumbnail});
                         res.json(newBook);
                     })
                 .catch((error) => {
