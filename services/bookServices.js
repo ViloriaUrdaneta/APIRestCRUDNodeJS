@@ -19,6 +19,10 @@ async function createBook(newBookData) {
             newBook.title = newBookData.title;
             newBook.author = idAuthor;
             newBook.googleId = newBookData.googleId;
+            newBook.description = newBookData.description;
+            if(newBookData.thumbnail){
+                newBook.thumbnail = newBookData.thumbnail;
+            }
             await newBook.save();
             const idBook = newBook._id
             authorServices.addBookToAuthor(idAuthor, idBook )
@@ -30,6 +34,10 @@ async function createBook(newBookData) {
             newBook.title = newBookData.title;
             newBook.author = idAuthor;
             newBook.googleId = newBookData.googleId;
+            newBook.description = newBookData.description;
+            if(newBookData.thumbnail){
+                newBook.thumbnail = newBookData.thumbnail;
+            }
             await newBook.save();
             const idBook = newBook._id
             authorServices.addBookToAuthor(idAuthor, idBook )

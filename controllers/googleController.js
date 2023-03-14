@@ -40,13 +40,13 @@ const getGoogleAPIById = async (req, res, next) => {
             lang: "es"
         };
         googleBooksAPI(id, options)
-        .then((results) => {
-                res.json(results);
-            })
-        .catch((error) => {
-            console.error(error);
-            res.status(500).send("error googleBooksAPI in googleController");
-        });    
+            .then((results) => {
+                    res.json(results);
+                })
+            .catch((error) => {
+                console.error(error);
+                res.status(500).send("error googleBooksAPI in googleController");
+            });    
     } catch (error) {
         res.status(500).send(error, 'error at getGoogleApi in googleController');
     }
@@ -65,17 +65,31 @@ const postGoogleAPI = async (req, res, next) => {
                 lang: "es"
             };
             googleBooksAPI(id, options)
-            .then( async (results) => {
-                    const title = results.map((result) => result.title)[0];
-                    const author = results.map((result) => result.authors[0])[0];
-                    const googleId = id;
-                    const newBook = await bookServices.createBook({title, author, googleId});
-                    res.json(newBook);
-                })
-            .catch((error) => {
-                console.error(error);
-                res.status(500).send("error googleBooksAPI in googleController");
-            });    
+                .then( async (results) => {
+                        console.log(results)
+                        const title = results.map((result) => result.title)[0];
+                        const author = results.map((result) => result.authors[0])[0];
+                        let description;
+                        if(results.map((result) => result.description)[0]){
+                            description = results.map((result) => result.description)[0];
+                        } else{
+                            description = '';
+                        }
+                        let thumbnail;
+                        if(results.map((result) => result.thumbnail)[0]){
+                            thumbnail = results.map((result) => result.thumbnail)[0]
+                        } else{
+                            thumbnail = '';
+                        }
+                        console.log('pre')
+                        const googleId = id;
+                        const newBook = await bookServices.createBook({title, author, description, googleId, thumbnail});
+                        res.json(newBook);
+                    })
+                .catch((error) => {
+                    console.error(error);
+                    res.status(500).send("error googleBooksAPI in googleController");
+                });    
         } catch (error) {
             res.status(500).send(error, 'error at getGoogleApi in googleController');
         }
