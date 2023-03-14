@@ -7,6 +7,7 @@ const bookmarkSchema = new Schema({
     resume: { type: String, required: true },
     createdAt: { type: Date },
     book: { type: Schema.Types.ObjectId , ref: "Book", required: true },
+    bookName : { type: String },
     //user: { type: Schema.Types.ObjectId , ref: "User", required: true }
 });
 
