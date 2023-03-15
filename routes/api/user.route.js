@@ -8,6 +8,8 @@ router.get('/by/:userId', userController.getUserById);
 
 router.post('/', userController.postUser);
 
+router.post('/register', userController.registerUser);
+
 router.put('/:userId', userController.putUser);
 
 router.delete('/:userId', userController.deleteUser);

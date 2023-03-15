@@ -1,4 +1,5 @@
 const User = require('../models/user.model');
+const userServices = require('../services/userServices')
 
 const getUser = async (req, res, next) => {
     try {
@@ -29,6 +30,16 @@ const postUser = async (req, res, next) => {
     }
 };
 
+const registerUser = async (req, res, next) => {
+    try {
+        const { name, mail, password } = req.body;
+        const newUser = await userServices.registerUser({ name, mail, password })
+        res.json(newUser);
+    } catch (error) {
+        res.status(500).json({ error: 'error at registerUser in userController'});
+    }
+};
+
 const putUser = async (req, res, next) => {
     try {
         const userEdit = await User.findByIdAndUpdate(
@@ -55,4 +66,4 @@ const deleteUser = async (req, res, next) => {
 
 
 
-module.exports = { getUser, getUserById, postUser, putUser, deleteUser }
+module.exports = { getUser, getUserById, postUser, registerUser, putUser, deleteUser }
