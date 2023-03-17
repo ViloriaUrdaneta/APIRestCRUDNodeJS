@@ -9,7 +9,8 @@ const bookSchema = new Schema({
     thumbnail: { type: String },
     description: { type: String },
     year: { type: String },
-    bookmarks: [{ type: Schema.Types.ObjectId, ref: "Bookmark" }]
+    bookmarks: [{ type: Schema.Types.ObjectId, ref: "Bookmark" }],
+    user: { type: Schema.Types.ObjectId, ref: "User" },
 });
 
 module.exports = mongoose.model('book', bookSchema);

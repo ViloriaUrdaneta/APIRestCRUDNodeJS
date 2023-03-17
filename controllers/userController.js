@@ -32,8 +32,8 @@ const postUser = async (req, res, next) => {
 
 const registerUser = async (req, res, next) => {
     try {
-        const { name, mail, password } = req.body;
-        const newUser = await userServices.registerUser({ name, mail, password })
+        const { name, email, password } = req.body;
+        const newUser = await userServices.registerUser({ name, email, password })
         res.json(newUser);
     } catch (error) {
         res.status(500).json({ error: 'error at registerUser in userController'});

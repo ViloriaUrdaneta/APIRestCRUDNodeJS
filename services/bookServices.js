@@ -21,6 +21,7 @@ async function createBook(newBookData) {
             newBook.authorName = newBookData.authorName;
             newBook.googleId = newBookData.googleId;
             newBook.description = newBookData.description;
+            newBook.user = newBookData.user;
             if(newBookData.thumbnail){
                 newBook.thumbnail = newBookData.thumbnail;
             }
@@ -37,6 +38,7 @@ async function createBook(newBookData) {
             newBook.authorName = newBookData.authorName;
             newBook.googleId = newBookData.googleId;
             newBook.description = newBookData.description;
+            newBook.user = newBookData.user;
             if(newBookData.thumbnail){
                 newBook.thumbnail = newBookData.thumbnail;
             }

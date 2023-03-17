@@ -60,6 +60,7 @@ const postGoogleAPI = async (req, res, next) => {
     } else {
         try {
             const id = req.params.id;
+            const user = req.user.id;
             const options = {
                 key: googleKey,
                 lang: "es"
@@ -84,7 +85,7 @@ const postGoogleAPI = async (req, res, next) => {
                         }
                         console.log('pre')
                         const googleId = id;
-                        const newBook = await bookServices.createBook({title, author, authorName, description, googleId, thumbnail});
+                        const newBook = await bookServices.createBook({title, author, authorName, description, googleId, thumbnail, user});
                         res.json(newBook);
                     })
                 .catch((error) => {
