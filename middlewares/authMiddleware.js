@@ -9,6 +9,7 @@ const getTokenFromRequest = (request) => {
 const protect = (req, res, next) => {
     try {
         const token = getTokenFromRequest(req)
+        console.log('token en middlewware: ', token)
         const user = verifyJWT(token)
         if (user.id) {
             req.user = user
@@ -16,7 +17,7 @@ const protect = (req, res, next) => {
         } else{
             console.log('token no conseguido')
             res.status(401)
-            throw new Error('Nor authorized')
+            throw new Error('Not authorized')
         }
     } catch (err) {
         console.log('error en isUserAuthenticated: ', err)
