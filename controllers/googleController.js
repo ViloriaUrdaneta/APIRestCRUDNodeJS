@@ -18,12 +18,12 @@ const searchGoogleAPI = async (req, res, next) => {
             lang: "es"
         };
         googleBooksAPI(term, options)
-        .then((results) => {
-                res.json(results);
-            })
-        .catch((error) => {
-            console.error(error);
-            res.status(500).send("error googleBooksAPI in googleController");
+            .then((results) => {
+                    res.json(results);
+                })
+            .catch((error) => {
+                console.error(error);
+                res.status(500).send("error googleBooksAPI in googleController");
         });    
     } catch (error) {
         res.status(500).send(error, 'error at getGoogleApi in googleController');

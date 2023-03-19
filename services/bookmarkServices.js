@@ -9,6 +9,7 @@ async function createBookmark(newBookmarkData) {
         const newBookmark =  new Bookmark;
         newBookmark.page = newBookmarkData.page;
         newBookmark.resume = newBookmarkData.resume;
+        newBookmark.user = newBookmarkData.user;
         newBookmark.book = newBookmarkData.book;
         const book = await Book.findById(newBookmarkData.book);
         newBookmark.bookName = book.title;

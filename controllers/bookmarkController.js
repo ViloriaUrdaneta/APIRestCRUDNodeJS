@@ -20,10 +20,20 @@ const getBookmarkByBook = async (req, res, next) => {
     }
 };
 
+const getBookmarkByUser = async (req, res, next) => {
+    try {
+        const bookmarksByUser = await Bookmark.find({ user: req.user.id });
+        res.json(bookmarksByUser);
+    } catch (error) {
+        res.status(500).json({ bookmark: 'error at getBookmarkByBook in bookmarkController'});
+    }
+};
+
 const postBookmark = async (req, res, next) => {
     try {
         const { page, resume, book } = req.body;
-        const newBookmark = await bookmarkServices.createBookmark({page, resume, book});
+        const user = req.user.id
+        const newBookmark = await bookmarkServices.createBookmark({page, resume, book, user});
         res.json(newBookmark);
     } catch (error) {
         res.status(500).json({ error: 'error at postBookmark in bookmarkController'});
@@ -41,4 +51,4 @@ const deleteBookmark = async (req, res, next) => {
     }
 };
 
-module.exports = { getBookmark, postBookmark, deleteBookmark, getBookmarkByBook }
+module.exports = { getBookmark, postBookmark, deleteBookmark, getBookmarkByBook, getBookmarkByUser }

@@ -9,7 +9,6 @@ const getTokenFromRequest = (request) => {
 const protect = (req, res, next) => {
     try {
         const token = getTokenFromRequest(req)
-        console.log('token en middlewware: ', token)
         const user = verifyJWT(token)
         if (user.id) {
             req.user = user

@@ -1,12 +1,15 @@
 const router = require('express').Router();
 const bookmarkController = require('../../controllers/bookmarkController')
+const protect = require('../../middlewares/authMiddleware')
 
 
 router.get('/', bookmarkController.getBookmark);
 
-router.get('/bybook/:bookId', bookmarkController.getBookmarkByBook);
+router.get('/bybook/:bookId', protect, bookmarkController.getBookmarkByBook);
 
-router.post('/', bookmarkController.postBookmark);
+router.get('/byUSer', protect, bookmarkController.getBookmarkByUser);
+
+router.post('/', protect, bookmarkController.postBookmark);
 
 //router.put('/:userId', userController.putUser);
 

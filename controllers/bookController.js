@@ -10,12 +10,13 @@ const getBook = async (req, res, next) => {
     }
 };
 
-const getBookByUser = async (req, res, next) => {
+const getBooksByUser = async (req, res, next) => {
     try {
-        const books = await Book.find({ user: req.user.id });
-        res.json(books);
+        const bookVolumesByUser = await bookServices.findBookVolumesByUser(req.user.id);
+        //const books = await Book.find({ user: req.user.id });
+        res.json(bookVolumesByUser);
     }catch (error) {
-        res.status(500).json({ error: 'error at getBook in bookController'});
+        res.status(500).json({ error: 'error at getBooksByUser in bookController'});
     }
 };
 
@@ -42,7 +43,6 @@ const postBook = async (req, res, next) => {
     try {
         const { title, author } = req.body;
         const user = req.user.id
-        console.log( 'user: ', user)
         const newBook = await bookServices.createBook({title, author, user});
         res.json(newBook);
     } catch (error) {
@@ -62,4 +62,4 @@ const deleteBook = async (req, res, next) => {
     }
 };
 
-module.exports = { getBook, getBookByUser, postBook, deleteBook, getBookVolumes, getBookById }
+module.exports = { getBook, getBooksByUser, postBook, deleteBook, getBookVolumes, getBookById }

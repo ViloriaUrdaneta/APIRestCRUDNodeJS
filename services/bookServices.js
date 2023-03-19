@@ -92,6 +92,27 @@ async function findBookVolumes() {
     return bookVolumesList
 }
 
+async function findBookVolumesByUser(user) {
+
+    const bookVolumesList = []
+
+    try {
+        const books = await Book.find({ user: user });
+        
+        for (const book of books) {
+            const bookVolume = {};
+            bookVolume.title = book.title;
+            bookVolume.id = book._id;
+            bookVolume.author = book.authorName;
+
+            bookVolumesList.push(bookVolume)
+        }
+    } catch (error) {
+        console.log(error, 'error en findBookVolumes en bookservices')
+    }
+    
+    return bookVolumesList
+}
 
 
-module.exports = { createBook, addBookmarkToBook, findBookByGoogleId, findBookVolumes }
+module.exports = { createBook, addBookmarkToBook, findBookByGoogleId, findBookVolumes, findBookVolumesByUser }
