@@ -114,5 +114,24 @@ async function findBookVolumesByUser(user) {
     return bookVolumesList
 }
 
+async function findBookGoogleIdAndByUser(googleId, user) {
 
-module.exports = { createBook, addBookmarkToBook, findBookByGoogleId, findBookVolumes, findBookVolumesByUser }
+    const book = await Book.find({ googleId: googleId, user: user });
+
+    if(book.length > 0){
+        return book;
+    } else{
+        return null;
+    }
+
+}
+
+
+module.exports = { 
+    createBook, 
+    addBookmarkToBook, 
+    findBookByGoogleId, 
+    findBookVolumes, 
+    findBookVolumesByUser, 
+    findBookGoogleIdAndByUser 
+}
