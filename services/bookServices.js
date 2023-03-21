@@ -114,7 +114,7 @@ async function findBookVolumesByUser(user) {
     return bookVolumesList
 }
 
-async function findBookGoogleIdAndByUser(googleId, user) {
+async function findBookByGoogleIdAndUser(googleId, user) {
 
     const book = await Book.find({ googleId: googleId, user: user });
 
@@ -133,5 +133,5 @@ module.exports = {
     findBookByGoogleId, 
     findBookVolumes, 
     findBookVolumesByUser, 
-    findBookGoogleIdAndByUser 
+    findBookByGoogleIdAndUser 
 }

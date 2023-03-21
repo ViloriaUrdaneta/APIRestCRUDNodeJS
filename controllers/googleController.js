@@ -58,7 +58,7 @@ const postGoogleAPI = async (req, res, next) => {
     const googleId = req.params.id;
     const user = req.user.id;
 
-    const existBook = await bookServices.findBookGoogleIdAndByUser(googleId, user);
+    const existBook = await bookServices.findBookByGoogleIdAndUser(googleId, user);
 
     if(existBook){
         res.status(500).send("este libro ya existe en tu biblioteca")
